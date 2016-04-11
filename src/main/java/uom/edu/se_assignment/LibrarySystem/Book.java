@@ -29,9 +29,20 @@ public class Book {
 		return this.Title;
 	}
 	
+	public void setTitle(String Title)
+	{
+		// TODO setting
+		//this.Title = Title;
+	}
+	
 	public String getAuthor()
 	{
 		return this.Author;
+	}
+	
+	public void setAuthor(String Author)
+	{
+		
 	}
 	
 	public String getGenre()
@@ -39,9 +50,20 @@ public class Book {
 		return this.Genre;
 	}
 	
-	public int getYear()
+	public void setGenre(String genre)
+	{
+		
+		
+	}
+	
+	public int getPublicationYear()
 	{
 		return this.PublicationYear;
+	}
+	
+	public void setPublicationYear(int year)
+	{
+		
 	}
 	
 	public int getEdition()
@@ -50,14 +72,32 @@ public class Book {
 		
 	}
 	
+	public void setEdition(int edition)
+	{
+		
+		
+	}
+	
 	public User getLoanee()
 	{
 		return this.Loanee;
 	}
 	
+	public void setLoanee(User loanee)
+	{
+		
+		
+	}
+	
 	public String getLoanOutDate()
 	{
 		return this.LoanOutDate;
+		
+	}
+	
+	public void setLoanOutDate(String LoanOutDate)
+	{
+		
 		
 	}
 	
