@@ -26,38 +26,38 @@ public class Book {
 
 	public String getTitle() {
 		
-		return null;
+		return this.Title;
 	}
 	
 	public String getAuthor()
 	{
-		return null;
+		return this.Author;
 	}
 	
 	public String getGenre()
 	{
-		return null;
+		return this.Genre;
 	}
 	
 	public int getYear()
 	{
-		return 0;
+		return this.PublicationYear;
 	}
 	
 	public int getEdition()
 	{
-		return 0;
+		return this.Edition;
 		
 	}
 	
 	public User getLoanee()
 	{
-		return null;
+		return this.Loanee;
 	}
 	
 	public String getLoanOutDate()
 	{
-		return null;
+		return this.LoanOutDate;
 		
 	}
 	
