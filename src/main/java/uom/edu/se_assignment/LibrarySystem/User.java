@@ -21,41 +21,41 @@ public class User
 
 	public int getIdNumber() 
 	{
-		return 0;
+		return idNumber;
 	}
 
 	public void setIdNumber(int idNumber) 
 	{
-		
+		this.idNumber = idNumber;
 	}
 
 	public String getFullName() {
-		return null;
+		return FullName;
 	}
 
 	public void setFullName(String fullName) 
 	{
-		
+		FullName = fullName;
 	}
 
 	public String getAddress() 
 	{
-		return null;
+		return Address;
 	}
 
 	public void setAddress(String address) 
 	{
-		
+		Address = address;
 	}
 
 	public String getContactNumber() 
 	{
-		return null;
+		return ContactNumber;
 	}
 
 	public void setContactNumber(String contactNumber) 
 	{
-		
+		ContactNumber = contactNumber;
 	}
 
 }
