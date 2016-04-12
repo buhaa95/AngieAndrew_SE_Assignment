@@ -17,7 +17,7 @@ public class Library
 	
 	public List<Book> getCollection() 
 	{
-		return null;
+		return collection;
 	}
 
 	/*public void setCollection(List<Book> collection) 
@@ -27,7 +27,7 @@ public class Library
 
 	public List<Book> getBooksOnLoan() 
 	{
-		return null;
+		return booksOnLoan;
 	}
 
 	/*public void setBooksOnLoan(List<Book> booksOnLoan) 
@@ -37,7 +37,7 @@ public class Library
 
 	public List<User> getUsers() 
 	{
-		return null;
+		return users;
 	}
 
 	/*public void setUsers(List<User> users) 

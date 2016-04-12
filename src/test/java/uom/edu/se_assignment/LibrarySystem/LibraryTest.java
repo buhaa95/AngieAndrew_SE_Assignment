@@ -32,7 +32,7 @@ public class LibraryTest {
 		
 		users.add(user1);
 		
-		lib = new Library(collection, null, null);
+		lib = new Library(collection, booksOnLoan, users);
 	}
 
 	@Test
