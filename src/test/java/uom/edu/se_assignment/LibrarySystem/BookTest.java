@@ -1,12 +1,11 @@
 package uom.edu.se_assignment.LibrarySystem;
 
-/*import junit.framework.TestCase;
-import junit.framework.Test;
-import junit.framework.TestSuite;*/
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.*;
-
-public class BookTest /*extends TestCase*/ {
+public class BookTest{
 	
 	Book myBook;
 	@Before 
@@ -15,13 +14,13 @@ public class BookTest /*extends TestCase*/ {
 		myBook = new Book("Harry Potter and the Half Blood Prince", "J.K. Rowling", "Fiction", 2008,1, null, "21/12/2012" );
 	}
 	
-	@org.junit.Test
+	@Test
 	public void getTitleTest()
 	{
 		Assert.assertEquals("Harry Potter and the Half Blood Prince", myBook.getTitle());
 	}
 	
-	@org.junit.Test
+	@Test
 	public void setTitleTest()
 	{
 		myBook.setTitle("Lord of the Rings");
@@ -29,13 +28,13 @@ public class BookTest /*extends TestCase*/ {
 	}
 	
 	
-	@org.junit.Test
+	@Test
 	public void getAuthorTest()
 	{
 		Assert.assertEquals("J.K. Rowling", myBook.getAuthor());
 	}
 	
-	@org.junit.Test
+	@Test
 	public void setAuthorTest()
 	{
 		myBook.setAuthor("J.R.R Tolkien");
@@ -44,13 +43,13 @@ public class BookTest /*extends TestCase*/ {
 	
 	
 	
-	@org.junit.Test
+	@Test
 	public void getYearTest()
 	{
 		Assert.assertEquals(2008, myBook.getPublicationYear());
 	}
 	
-	@org.junit.Test
+	@Test
 	public void setPublicationYearTest()
 	{
 		myBook.setPublicationYear(2005);
@@ -58,13 +57,13 @@ public class BookTest /*extends TestCase*/ {
 	}
 	
 	
-	@org.junit.Test
+	@Test
 	public void getGenreTest()
 	{
 		Assert.assertEquals("Fiction", myBook.getGenre());
 	}
 	
-	@org.junit.Test
+	@Test
 	public void setGenreTest()
 	{
 		myBook.setGenre("Mystery");
@@ -72,13 +71,13 @@ public class BookTest /*extends TestCase*/ {
 	}
 	
 	
-	@org.junit.Test
+	@Test
 	public void getEditionTest()
 	{
 		Assert.assertEquals(1, myBook.getEdition());
 	}
 	
-	@org.junit.Test
+	@Test
 	public void setEditionTest()
 	{
 		myBook.setEdition(2);
@@ -86,13 +85,13 @@ public class BookTest /*extends TestCase*/ {
 	}
 	
 	
-	@org.junit.Test
+	@Test
 	public void getUserTest()
 	{
 		Assert.assertEquals(null, myBook.getLoanee());
 	}
 	
-	@org.junit.Test
+	@Test
 	public void setUserTest()
 	{
 		myBook.setLoanee(null);
@@ -100,16 +99,22 @@ public class BookTest /*extends TestCase*/ {
 	}
 	
 	
-	@org.junit.Test
+	@Test
 	public void getLoanOutDateTest()
 	{
 		Assert.assertEquals("21/12/2012", myBook.getLoanOutDate());
 	}
 	
-	@org.junit.Test
+	@Test
 	public void setLoanOutDateTest()
 	{
 		myBook.setLoanOutDate("24/12/2016");
 		Assert.assertEquals("24/12/2016", myBook.getLoanOutDate());
+	}
+	
+	@After
+	public void teardown()
+	{
+		myBook = null;
 	}
 }
