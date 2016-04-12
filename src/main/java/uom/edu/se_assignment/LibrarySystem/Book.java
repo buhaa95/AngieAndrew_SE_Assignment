@@ -5,14 +5,13 @@ public class Book {
 	
 	private String Title;
 	private String Author;
-	//TODO Genre should be changed to genre object
-	private String Genre;
+	private Genre Genre;
 	private int PublicationYear;
 	private int Edition;
 	private User Loanee;
 	private String LoanOutDate;
 	
-	Book(String t, String a, String g, int y, int e, User l, String d)
+	Book(String t, String a, Genre g, int y, int e, User l, String d)
 	{
 		Title = t;
 		Author = a;
@@ -43,12 +42,12 @@ public class Book {
 		this.Author = Author;
 	}
 	
-	public String getGenre()
+	public Genre getGenre()
 	{
 		return this.Genre;
 	}
 	
-	public void setGenre(String Genre)
+	public void setGenre(Genre Genre)
 	{
 		this.Genre = Genre;
 		

@@ -8,10 +8,17 @@ import org.junit.Test;
 public class BookTest{
 	
 	Book myBook;
+	Genre genre, newGenre;
+	User Andy, newUser;
 	@Before 
 	public void startup() 
 	{
-		myBook = new Book("Harry Potter and the Half Blood Prince", "J.K. Rowling", "Fiction", 2008,1, null, "21/12/2012" );
+		genre = new Genre("Fiction");
+		Andy = new User(4877, "Andy Hill", "Qawra", "55887789");
+		myBook = new Book("Harry Potter and the Half Blood Prince", "J.K. Rowling", genre, 2008,1, Andy, "21/12/2012" );
+
+		newUser = new User(4455, "Connie Buttigieg", "Marsaxlokk", "00356 88998899");
+		newGenre = new Genre("Mystery");
 	}
 	
 	@Test
@@ -42,7 +49,6 @@ public class BookTest{
 	}
 	
 	
-	
 	@Test
 	public void getYearTest()
 	{
@@ -60,14 +66,14 @@ public class BookTest{
 	@Test
 	public void getGenreTest()
 	{
-		Assert.assertEquals("Fiction", myBook.getGenre());
+		Assert.assertEquals(genre, myBook.getGenre());
 	}
 	
 	@Test
 	public void setGenreTest()
 	{
-		myBook.setGenre("Mystery");
-		Assert.assertEquals("Mystery", myBook.getGenre());
+		myBook.setGenre(newGenre);
+		Assert.assertEquals(newGenre, myBook.getGenre());
 	}
 	
 	
@@ -88,14 +94,14 @@ public class BookTest{
 	@Test
 	public void getUserTest()
 	{
-		Assert.assertEquals(null, myBook.getLoanee());
+		Assert.assertEquals(Andy, myBook.getLoanee());
 	}
 	
 	@Test
 	public void setUserTest()
 	{
-		myBook.setLoanee(null);
-		Assert.assertEquals(null, myBook.getLoanee());
+		myBook.setLoanee(newUser);
+		Assert.assertEquals(newUser, myBook.getLoanee());
 	}
 	
 	
@@ -116,5 +122,9 @@ public class BookTest{
 	public void teardown()
 	{
 		myBook = null;
+		newUser = null;
+		Andy = null;
+		genre = null;
+		newGenre = null;
 	}
 }

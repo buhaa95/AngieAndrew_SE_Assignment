@@ -58,4 +58,16 @@ public class User
 		ContactNumber = contactNumber;
 	}
 
+	public List<Book> getListOfBurrowedBooks()
+	{
+		return listOfBurrowedBooks;
+	}
+	
+	public void addBook(Book book)
+	{
+		listOfBurrowedBooks.add(book);
+	}
+	
+	
+
 }

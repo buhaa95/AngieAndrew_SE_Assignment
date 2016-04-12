@@ -13,6 +13,8 @@ public class UserTest {
 	public void startup()
 	{
 		user = new User(1, "John Smith", "Mosta", "00356 79007789");
+		
+		//book objects to test 
 	}
 	
 	@Test
