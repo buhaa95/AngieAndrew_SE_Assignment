@@ -15,7 +15,7 @@ public class Catalogue
 	
 	public List<Book> getAllBooks() 
 	{
-		return null;
+		return collection;
 	}
 	
 	/**
@@ -25,8 +25,16 @@ public class Catalogue
 	 */
 	public List<Book> searchByTitle(String word)
 	{
+		word = word.toUpperCase();
 		List<Book> myList = new ArrayList<Book>();
-	
+		
+		for(Book b: Catalogue.collection)
+		{
+			if(b.getTitle().toUpperCase().contains(word))
+			{
+				myList.add(b);
+			}
+		}
 		return myList;
 	}
 	
@@ -38,9 +46,16 @@ public class Catalogue
 	public List<Book> searchByGenre(String genre)
 	{
 		List<Book> myList = new ArrayList<Book>();
+		Genre g = new Genre(genre);
 		
-		
-		return null;
+		for(Book b: Catalogue.collection)
+		{
+			if(b.getGenre()==g)
+			{
+				myList.add(b);
+			}
+		}
+		return myList;
 	}
 	
 	/**
@@ -52,7 +67,13 @@ public class Catalogue
 	{
 		List<Book> myList = new ArrayList<Book>();
 		
-	
+		for(Book b: Catalogue.collection)
+		{
+			if(b.getPublicationYear()==year)
+			{
+				myList.add(b);
+			}
+		}
 		return myList;
 	}	
 }
