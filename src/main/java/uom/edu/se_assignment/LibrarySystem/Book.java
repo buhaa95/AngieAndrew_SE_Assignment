@@ -15,11 +15,7 @@ public class Book {
 	Book(int id, String t, String a, Genre g, int y, int e, User l, Date d)
 	{
 		// validation for id
-		if (isValidId(id))
-			bookId = id;
-		else
-			throw new IllegalArgumentException("User with this ID already exists");
-		
+		bookId = id;
 		Title = t;
 		Author = a;
 		Genre = g;
@@ -33,9 +29,10 @@ public class Book {
 		return bookId;
 	}
 
-	public void setBookId(int bookId) {
+	//no need for id setter because id is unique and cannot be changed
+	/*public void setBookId(int bookId) {
 		this.bookId = bookId;
-	}
+	}*/
 
 	public String getTitle() {
 		
@@ -114,9 +111,13 @@ public class Book {
 	}
 	
 	//helper function
-	private boolean isValidId(int id)
+	protected boolean isValidId(int id)
 	{
 		List<Book> catalogue =  Catalogue.collection;
+		
+		if (catalogue == null)
+			return true;
+		
 		for (final Book b: catalogue)
 		{
 			if(b.getBookId() == id) return false;

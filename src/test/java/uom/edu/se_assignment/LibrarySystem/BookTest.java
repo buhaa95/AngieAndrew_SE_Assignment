@@ -1,5 +1,9 @@
 package uom.edu.se_assignment.LibrarySystem;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,15 +14,26 @@ public class BookTest{
 	Book myBook;
 	Genre genre, newGenre;
 	User Andy, newUser;
+	Date date, date2;
+	
 	@Before 
 	public void startup() 
 	{
-		genre = new Genre("Fiction");
+		genre = Genre.FICTION;
 		Andy = new User(4877, "Andy Hill", "Qawra", "55887789");
-		myBook = new Book("Harry Potter and the Half Blood Prince", "J.K. Rowling", genre, 2008,1, Andy, "21/12/2012" );
+		date = new GregorianCalendar(2016, Calendar.JANUARY, 21).getTime();
+		date2 = new GregorianCalendar(2016, Calendar.FEBRUARY,17).getTime();
+		
+		myBook = new Book(25,"Harry Potter and the Half Blood Prince", "J.K. Rowling", genre, 2008,1, Andy, date );
 
 		newUser = new User(4455, "Connie Buttigieg", "Marsaxlokk", "00356 88998899");
-		newGenre = new Genre("Mystery");
+		newGenre = Genre.MYSTERY;
+	}
+	
+	@Test
+	public void getIdTest()
+	{
+		Assert.assertEquals(25, myBook.getBookId());
 	}
 	
 	@Test
@@ -108,14 +123,14 @@ public class BookTest{
 	@Test
 	public void getLoanOutDateTest()
 	{
-		Assert.assertEquals("21/12/2012", myBook.getLoanOutDate());
+		Assert.assertEquals(date, myBook.getLoanOutDate());
 	}
 	
 	@Test
 	public void setLoanOutDateTest()
 	{
-		myBook.setLoanOutDate("24/12/2016");
-		Assert.assertEquals("24/12/2016", myBook.getLoanOutDate());
+		myBook.setLoanOutDate(date2);
+		Assert.assertEquals(date2, myBook.getLoanOutDate());
 	}
 	
 	@After

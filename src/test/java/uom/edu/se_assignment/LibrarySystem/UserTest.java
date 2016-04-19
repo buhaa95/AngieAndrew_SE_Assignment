@@ -1,5 +1,7 @@
 package uom.edu.se_assignment.LibrarySystem;
 
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,13 +10,15 @@ import org.junit.Test;
 public class UserTest {
 	
 	User user;
+	Book book;
+	Date date;
 	
 	@Before
 	public void startup()
 	{
-		user = new User(1, "John Smith", "Mosta", "00356 79007789");
-		
-		//book objects to test 
+		user = new User(1, "John Smith", "Mosta", "00356 79007789"); 
+		date = new Date();
+		book = new Book(2, "Macbeth", "William Shakespear", Genre.TRAGEDY, 1600, 1, user, date);
 	}
 	
 	@Test
@@ -23,12 +27,7 @@ public class UserTest {
 		Assert.assertEquals(1, user.getIdNumber());
 	}
 	
-	@Test
-	public void setIdNumberTest()
-	{
-		user.setIdNumber(21);
-		Assert.assertEquals(21, user.getIdNumber());
-	}
+	
 	
 	@Test
 	public void getFullNameTest()
@@ -67,6 +66,20 @@ public class UserTest {
 	{
 		user.setContactNumber("12345");
 		Assert.assertEquals("12345", user.getContactNumber());
+	}
+	
+	@Test 
+	public void addBookTest()
+	{
+		user.addBook(book);
+		Assert.assertEquals(1, user.getListOfBurrowedBooks().size());
+	}
+	
+	@Test
+	public void removeBookTest()
+	{
+		user.removeBook(book);
+		Assert.assertEquals(0, user.getListOfBurrowedBooks().size());
 	}
 	
 	@After
