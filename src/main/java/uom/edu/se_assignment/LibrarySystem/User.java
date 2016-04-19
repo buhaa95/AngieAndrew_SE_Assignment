@@ -10,6 +10,7 @@ public class User
 	private String Address;
 	private String ContactNumber;
 	private List<Book> listOfBurrowedBooks = new ArrayList<Book>();
+	private Library lib = new Library();
 	
 	User(int id, String name, String address, String contact)
 	{
@@ -25,13 +26,11 @@ public class User
 		return idNumber;
 	}
 
-	//no need for id setter because id is unique and cannot be changed
-	
-	/*public void setIdNumber(int idNumber) 
+	public void setIdNumber(int idNumber) 
 	{
 		this.idNumber = idNumber;
 	}
-*/
+
 	public String getFullName() {
 		return FullName;
 	}
@@ -81,7 +80,7 @@ public class User
 	 ********************/
 	protected boolean isValidId(int id)
 	{		
-		List<User> libraryUsers =  Library.users;
+		List<User> libraryUsers =  lib.getUsers();
 		if (libraryUsers == null)
 			return true;
 		

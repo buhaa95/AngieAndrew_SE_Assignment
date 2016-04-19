@@ -2,71 +2,59 @@ package uom.edu.se_assignment.LibrarySystem;
 
 import org.junit.After;
 import org.junit.Assert;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class CatalogueTest {
-
-	Catalogue catalogue;	
-	List<Book> collection;
-	
-	Book myBook, myBook1;
-	Genre genre;
+	Catalogue catalogue;
+	Book myBook, myBook1, myBook2, myBook3;
 	
 	@Before
 	public void startup()
-	{
-		collection = new ArrayList<Book>();	
-		genre = new Genre("Fiction");
+	{	
+		catalogue = new Catalogue();
 		
-		myBook = new Book("Harry Potter and the Half Blood Prince", "J.K. Rowling", genre, 2008,1, null, null );
-	    myBook1 = new Book("Lord of the Rings", "J.R.R Tolkien", genre, 2005, 1, null, null); 
-		
-	    // user is put to null, cause if the book is loaned out, then it won't be in the catalogue
+		// user is put to null, cause if the book is loaned out, then it won't be in the catalogue
 	    // otherwise it would just be a whole library. Same goes for loaned out date
-	    
-		collection.add(myBook);
-		collection.add(myBook1);
-		
-		catalogue = new Catalogue(collection);
+		myBook = new Book(27,"Harry Potter and the Half Blood Prince", "J.K. Rowling", Genre.FICTION, 2008, 1, null, null);
+	    myBook1 = new Book(48,"Lord of the Rings", "J.R.R Tolkien", Genre.FICTION, 2005, 1, null, null); 
+	    myBook2 = new Book(50,"Java for dummies", "Barry Burd", Genre.SCIENCE, 2005, 1, null, null);
+	    myBook3 = new Book(28,"Harry Potter and the Deathly Hallows", "J.K. Rowling", Genre.FICTION, 2010, 1, null, null);
+	   	    
+		catalogue.addBook(myBook);
+		catalogue.addBook(myBook1);
+		catalogue.addBook(myBook2);
+		catalogue.addBook(myBook3);
 	}
 	
 	@Test
 	public void getAllBooksTest()
 	{
-		Assert.assertEquals(collection, catalogue.getAllBooks());
+		Assert.assertEquals(4, catalogue.getAllBooks().size());
 		
 	}
 	
 	@Test
 	public void searchByTitleTest() 
 	{	
-		Assert.assertEquals(collection.contains(myBook), catalogue.searchByTitle("Harry").contains(myBook));			
+		Assert.assertEquals(2, catalogue.searchByTitle("Harry").size());			
 	}
-	
-	// If both the parameters in the above return true, then test is valid (contains will return boolean)
 	
 	@Test
 	public void searchByGenreTest()
 	{
-		Assert.assertEquals(collection.contains(myBook1.getGenre()), catalogue.searchByGenre("Fiction").contains(myBook1));
+		Assert.assertEquals(3, catalogue.searchByGenre(Genre.FICTION).size());
 	}
 	
 	@Test
 	public void searchByYearTest()
 	{
-		Assert.assertEquals(collection.contains(myBook), catalogue.searchByYear(2008).contains(myBook));
+		Assert.assertEquals(2, catalogue.searchByYear(2005).size());
 	}
 	
 	@After
 	public void teardown()
 	{
-		collection = null;
 		
 	}
 

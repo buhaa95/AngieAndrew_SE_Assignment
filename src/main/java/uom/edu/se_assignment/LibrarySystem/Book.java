@@ -113,7 +113,8 @@ public class Book {
 	//helper function
 	protected boolean isValidId(int id)
 	{
-		List<Book> catalogue =  Catalogue.collection;
+		Catalogue c = new Catalogue();
+		List<Book> catalogue =  c.getAllBooks();
 		
 		if (catalogue == null)
 			return true;

@@ -27,7 +27,12 @@ public class UserTest {
 		Assert.assertEquals(1, user.getIdNumber());
 	}
 	
-	
+	@Test
+	public void setIdNumberTest()
+	{
+		user.setIdNumber(21);
+		Assert.assertEquals(21, user.getIdNumber());
+	}
 	
 	@Test
 	public void getFullNameTest()
