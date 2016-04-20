@@ -1,5 +1,9 @@
 package uom.edu.se_assignment.LibrarySystem;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,6 +14,7 @@ public class LibraryTest {
 	
 	Book b, b1, b2, b3, b4, b5, b6, b7, b8;
 	User u,u1,u2,u3,u4,u5,u6,u7;
+	Date date;
 	
 	@Before
 	public void setup()
@@ -116,7 +121,7 @@ public class LibraryTest {
 		
 	}
 	
-	@Test (expected = Exception.class)
+	@Test (expected = IllegalArgumentException.class)
 	public void removeUserInValid()
 	{
 		lib.addUser(u);
@@ -131,6 +136,40 @@ public class LibraryTest {
 		
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void loanBookToInValid1() 
+	{
+		// book already loaned out 
+		
+		lib.addBook(b1);
+		lib.booksOnLoan.add(b1);
+		
+		lib.loanBookTo(b1,u1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void loanBookToInValid2() 
+	{
+		// user has already 3 books
+		
+		u2.addBook(b);
+		u2.addBook(b1);
+		u2.addBook(b5);
+				
+		lib.loanBookTo(b2,u2);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void loanBookToInValid3() 
+	{
+		// book has exceeded 4 weeks
+		date = new GregorianCalendar(2016,Calendar.JANUARY,11).getTime();
+		b5.setLoanOutDate(date);
+		u2.addBook(b5);
+		
+		lib.loanBookTo(b1,u2);
+	}
+	
 	
 	
 	@Test
@@ -142,7 +181,15 @@ public class LibraryTest {
 	@Test
 	public void getUsers()
 	{
-		Assert.assertEquals(3, lib.getUsers().size());
+		lib.addUser(u);
+		lib.addUser(u1);
+		lib.addUser(u2);
+		lib.addUser(u3);
+		lib.addUser(u5);
+		lib.addUser(u6);
+		lib.addUser(u7);
+		
+		Assert.assertEquals(7, lib.getUsers().size());
 	}
 	
 	

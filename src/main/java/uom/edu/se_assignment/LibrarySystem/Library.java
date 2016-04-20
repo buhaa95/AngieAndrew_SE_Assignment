@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Library 
 {
-	private List<Book> booksOnLoan;
+	protected List<Book> booksOnLoan;
 	private List<User> users;
 	private Catalogue cat = new Catalogue();
 	protected List<Book> collection;
@@ -100,6 +100,7 @@ public class Library
 		if (u.getListOfBurrowedBooks().size()>= 3) return false;
 		
 		List<Book> burrowedbook = new ArrayList<Book>();
+		burrowedbook = u.getListOfBurrowedBooks();
 		Date today = new Date();
 		for (final Book b : burrowedbook)
 		{
