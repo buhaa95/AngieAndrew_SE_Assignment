@@ -1,6 +1,5 @@
 package uom.edu.se_assignment.LibrarySystem;
 import java.util.Date;
-import java.util.List;
 
 public class Book {
 	private int bookId;	

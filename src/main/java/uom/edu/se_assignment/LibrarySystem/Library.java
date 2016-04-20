@@ -8,12 +8,14 @@ public class Library
 {
 	private List<Book> booksOnLoan;
 	private List<User> users;
-	private Catalogue c = new Catalogue();
+	private Catalogue cat = new Catalogue();
+	protected List<Book> collection;
 	
 	public Library()
 	{
 		booksOnLoan = new ArrayList<Book>();
 		users = new ArrayList<User>();
+		collection = cat.getAllBooks();
 	}
 
 	public List<Book> getBooksOnLoan() 
@@ -37,7 +39,7 @@ public class Library
 	public void addBook(Book b)
 	{
 		if (isValidBookId(b.getBookId()))
-			c.addBook(b);
+			collection.add(b);
 		else 
 			throw new IllegalArgumentException("User with this ID already exists");
 	}
@@ -90,7 +92,7 @@ public class Library
 	
 	private boolean isFromCollection(Book b)
 	{
-		return c.getAllBooks().contains(b);
+		return collection.contains(b);
 	}
 	
 	private boolean canBurrow(User u)
@@ -123,14 +125,11 @@ public class Library
 	}
 	
 	private boolean isValidBookId(int id)
-	{
-		Catalogue c = new Catalogue();
-		List<Book> catalogue =  c.getAllBooks();
-		
-		if (catalogue == null)
+	{		
+		if (collection == null)
 			return true;
 		
-		for (final Book b: catalogue)
+		for (final Book b: collection)
 		{
 			if(b.getBookId() == id) return false;
 		}
