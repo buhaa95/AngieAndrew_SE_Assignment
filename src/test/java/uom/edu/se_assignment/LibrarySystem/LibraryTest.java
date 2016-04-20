@@ -99,6 +99,39 @@ public class LibraryTest {
 		lib.addBook(b8);
 	}
 	
+	@Test
+	public void removeUserValid()
+	{
+		lib.addUser(u);
+		lib.addUser(u1);
+		lib.addUser(u2);
+		lib.addUser(u3);
+		lib.addUser(u5);
+		lib.addUser(u6);
+		lib.addUser(u7);
+		
+		lib.removeUser(u);
+		
+		Assert.assertEquals(6, lib.getUsers().size());
+		
+	}
+	
+	@Test (expected = Exception.class)
+	public void removeUserInValid()
+	{
+		lib.addUser(u);
+		lib.addUser(u1);
+		lib.addUser(u2);
+		lib.addUser(u3);
+		lib.addUser(u5);
+		lib.addUser(u6);
+		lib.addUser(u7);
+		
+		lib.removeUser(u4);
+		
+	}
+	
+	
 	
 	@Test
 	public void getBooksOnLoan()
