@@ -108,23 +108,6 @@ public class Book {
 	{
 		this.LoanOutDate = LoanOutDate;
 		
-	}
-	
-	//helper function
-	protected boolean isValidId(int id)
-	{
-		Catalogue c = new Catalogue();
-		List<Book> catalogue =  c.getAllBooks();
-		
-		if (catalogue == null)
-			return true;
-		
-		for (final Book b: catalogue)
-		{
-			if(b.getBookId() == id) return false;
-		}
-		return true;
-	}
-	
+	}	
 	
 }

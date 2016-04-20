@@ -10,7 +10,6 @@ public class User
 	private String Address;
 	private String ContactNumber;
 	private List<Book> listOfBurrowedBooks = new ArrayList<Book>();
-	private Library lib = new Library();
 	
 	User(int id, String name, String address, String contact)
 	{
@@ -73,21 +72,5 @@ public class User
 	public void removeBook(Book b)
 	{
 		listOfBurrowedBooks.remove(b);
-	}
-	
-	/********************
-	 * Helper functions *
-	 ********************/
-	protected boolean isValidId(int id)
-	{		
-		List<User> libraryUsers =  lib.getUsers();
-		if (libraryUsers == null)
-			return true;
-		
-		for (final User u: libraryUsers)
-		{
-			if(u.getIdNumber() == id) return false;
-		}
-		return true;
 	}
 }
