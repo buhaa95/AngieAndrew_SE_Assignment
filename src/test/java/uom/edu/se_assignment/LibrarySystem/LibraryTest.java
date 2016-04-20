@@ -170,12 +170,48 @@ public class LibraryTest {
 		lib.loanBookTo(b1,u2);
 	}
 	
+	@Test
+	public void loanBookToValid()
+	{
+		lib.loanBookTo(b, u);
+		
+		Assert.assertEquals(1, lib.getBooksOnLoan().size());
+		Assert.assertEquals(1, u.getListOfBurrowedBooks().size());	
+	}
 	
+	
+	@Test
+	public void returnBookValid()
+	{
+		lib.addBook(b);
+		lib.loanBookTo(b, u);
+		lib.returnBook(b);
+		
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void returnBookInValid1()
+	{
+		lib.addBook(b);
+		lib.returnBook(b);
+	}
+	
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void returnBookInValid2()
+	{
+		lib.loanBookTo(b, u);
+		lib.returnBook(b);
+	}
 	
 	@Test
 	public void getBooksOnLoan()
 	{
-		Assert.assertEquals(2, lib.getBooksOnLoan().size());
+		lib.loanBookTo(b, u);
+		lib.loanBookTo(b1, u);
+		lib.loanBookTo(b2, u);
+		
+		Assert.assertEquals(3, lib.getBooksOnLoan().size());
 	}
 	
 	@Test
