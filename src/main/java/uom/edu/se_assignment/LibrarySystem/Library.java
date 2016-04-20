@@ -28,7 +28,7 @@ public class Library
 	
 	public void addUser(User u)
 	{
-		if(u.isValidId(u.getIdNumber())) 
+		if(isValidUserId(u.getIdNumber())) 
 			users.add(u);
 		else throw new IllegalArgumentException("User with this ID already exists");
 	}
@@ -36,7 +36,7 @@ public class Library
 	
 	public void addBook(Book b)
 	{
-		if (b.isValidId(b.getBookId()))
+		if (isValidBookId(b.getBookId()))
 			c.addBook(b);
 		else 
 			throw new IllegalArgumentException("User with this ID already exists");
@@ -54,6 +54,10 @@ public class Library
 	{
 		if(!isOnLoan(b) && canBurrow(u))
 		{
+			Date date = new Date();
+			
+			b.setLoanee(u);
+			b.setLoanOutDate(date);
 			u.addBook(b);
 			booksOnLoan.add(b);
 		}
@@ -70,6 +74,9 @@ public class Library
 				User u = b.getLoanee();
 				u.removeBook(b);
 				booksOnLoan.remove(b);
+				b.setLoanOutDate(null);
+				b.setLoanee(null);
+				
 			}else throw new IllegalArgumentException("Book is not from this Libarary's collection");
 		}else throw new IllegalArgumentException("User has not borrowed this book. Cannot return it.");
 	}
@@ -99,6 +106,33 @@ public class Library
 			
 			// 4 weeks = 28 days
 			if (daysBetween > 28) return false;
+		}
+		return true;
+	}
+	
+	private boolean isValidUserId(int id)
+	{		
+		if (users == null)
+			return true;
+		
+		for (final User u: users)
+		{
+			if(u.getIdNumber() == id) return false;
+		}
+		return true;
+	}
+	
+	private boolean isValidBookId(int id)
+	{
+		Catalogue c = new Catalogue();
+		List<Book> catalogue =  c.getAllBooks();
+		
+		if (catalogue == null)
+			return true;
+		
+		for (final Book b: catalogue)
+		{
+			if(b.getBookId() == id) return false;
 		}
 		return true;
 	}
