@@ -7,24 +7,24 @@ import org.junit.Test;
 
 public class CatalogueTest {
 	Catalogue catalogue;
-	Book myBook, myBook1, myBook2, myBook3;
+	Book b, b1, b2, b3;
 	
 	@Before
 	public void startup()
 	{	
 		catalogue = new Catalogue();
 		
-		// user is put to null, cause if the book is loaned out, then it won't be in the catalogue
-	    // otherwise it would just be a whole library. Same goes for loaned out date
-		myBook = new Book(27,"Harry Potter and the Half Blood Prince", "J.K. Rowling", Genre.FICTION, 2008, 1, null, null);
-	    myBook1 = new Book(48,"Lord of the Rings", "J.R.R Tolkien", Genre.FICTION, 2005, 1, null, null); 
-	    myBook2 = new Book(50,"Java for dummies", "Barry Burd", Genre.SCIENCE, 2005, 1, null, null);
-	    myBook3 = new Book(28,"Harry Potter and the Deathly Hallows", "J.K. Rowling", Genre.FICTION, 2010, 1, null, null);
+		//user arguments are set to null as it is beyond the purpose of this test suite to test user objects
+		
+		b = new Book(27,"Harry Potter and the Half Blood Prince", "J.K. Rowling", Genre.FICTION, 2008, 1, null, null);
+	    b1 = new Book(48,"Lord of the Rings", "J.R.R Tolkien", Genre.FICTION, 2005, 1, null, null); 
+	    b2 = new Book(50,"Java for dummies", "Barry Burd", Genre.SCIENCE, 2005, 1, null, null);
+	    b3 = new Book(28,"Harry Potter and the Deathly Hallows", "J.K. Rowling", Genre.FICTION, 2010, 1, null, null);
 	   	    
-		catalogue.addBook(myBook);
-		catalogue.addBook(myBook1);
-		catalogue.addBook(myBook2);
-		catalogue.addBook(myBook3);
+		catalogue.addBook(b);
+		catalogue.addBook(b1);
+		catalogue.addBook(b2);
+		catalogue.addBook(b3);
 	}
 	
 	@Test
@@ -55,7 +55,8 @@ public class CatalogueTest {
 	@After
 	public void teardown()
 	{
-		
+		catalogue = null;
+		b = b1 = b2 = b3 = null;
 	}
 
 }

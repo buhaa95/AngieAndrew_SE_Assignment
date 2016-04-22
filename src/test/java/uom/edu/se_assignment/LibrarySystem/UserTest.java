@@ -91,5 +91,7 @@ public class UserTest {
 	public void teardown()
 	{
 		user = null;
+		book = null;
+		date = null;
 	}
 }

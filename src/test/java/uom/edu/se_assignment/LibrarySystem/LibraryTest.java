@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class LibraryTest {
 	Library lib;
-	
 	Book b, b1, b2, b3, b4, b5, b6, b7, b8;
 	User u,u1,u2,u3,u4,u5,u6,u7;
 	Date date;
@@ -41,12 +40,18 @@ public class LibraryTest {
 		u5 = new User(564, "Thea Attard", "Birkirkara", "4561257898");
 		u6 = new User(8524, "Matthew Bartolo", "Zebbug", "0232156 06151");
 		u7 = new User(2459, "Francis Camilleri", "Birgu", "45623 20356");
-		
-
 	}
 	
 	@Test
-	public void addUserTestValid()
+	public void addUserTestValid1(){
+		//adding user to an empty users list
+		Assert.assertEquals(0, lib.getUsers().size());
+		lib.addUser(u);
+		Assert.assertEquals(1, lib.getUsers().size());
+	}
+		
+	@Test
+	public void addUserTestValid2()
 	{
 		lib.addUser(u);
 		lib.addUser(u1);
@@ -68,13 +73,18 @@ public class LibraryTest {
 		lib.addUser(u2);
 		lib.addUser(u3);
 		lib.addUser(u4);
-		lib.addUser(u5);
-		lib.addUser(u6);
-		lib.addUser(u7);
 	}
 	
 	@Test
-	public void addBookTestValid()
+	public void adBookTestValid1(){
+		//adding book to an empty book list
+		Assert.assertEquals(0, lib.collection.size());
+		lib.addBook(b);
+		Assert.assertEquals(1, lib.collection.size());
+	}
+	
+	@Test
+	public void addBookTestValid2()
 	{
 		lib.addBook(b);
 		lib.addBook(b1);
@@ -98,10 +108,6 @@ public class LibraryTest {
 		lib.addBook(b2);
 		lib.addBook(b3);
 		lib.addBook(b4);
-		lib.addBook(b5);
-		lib.addBook(b6);
-		lib.addBook(b7);
-		lib.addBook(b8);
 	}
 	
 	@Test
@@ -233,7 +239,10 @@ public class LibraryTest {
 	@After
 	public void teardown()
 	{
-	
+		lib = null;
+		b = b1 = b2 = b3 = b4  = b5  = b6  = b7 = b8 = null;
+		u = u1 = u2 = u3 = u4 = u5 = u6 = u7 = null;
+		date = null;
 	}
 
 }

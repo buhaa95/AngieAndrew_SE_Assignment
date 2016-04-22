@@ -13,21 +13,22 @@ public class BookTest{
 	
 	Book myBook;
 	Genre genre, newGenre;
-	User Andy, newUser;
+	User u, u1;
 	Date date, date2;
 	
 	@Before 
 	public void startup() 
 	{
 		genre = Genre.FICTION;
-		Andy = new User(4877, "Andy Hill", "Qawra", "55887789");
+		newGenre = Genre.MYSTERY;
+		
+		u = new User(4877, "Andy Hill", "Qawra", "55887789");
+		u1 = new User(4455, "Connie Buttigieg", "Marsaxlokk", "00356 88998899");
+		
 		date = new GregorianCalendar(2016, Calendar.JANUARY, 21).getTime();
 		date2 = new GregorianCalendar(2016, Calendar.FEBRUARY,17).getTime();
 		
-		myBook = new Book(25,"Harry Potter and the Half Blood Prince", "J.K. Rowling", genre, 2008,1, Andy, date );
-
-		newUser = new User(4455, "Connie Buttigieg", "Marsaxlokk", "00356 88998899");
-		newGenre = Genre.MYSTERY;
+		myBook = new Book(25,"Harry Potter and the Half Blood Prince", "J.K. Rowling", genre, 2008,1, u, date );
 	}
 	
 	@Test
@@ -109,14 +110,14 @@ public class BookTest{
 	@Test
 	public void getUserTest()
 	{
-		Assert.assertEquals(Andy, myBook.getLoanee());
+		Assert.assertEquals(u, myBook.getLoanee());
 	}
 	
 	@Test
 	public void setUserTest()
 	{
-		myBook.setLoanee(newUser);
-		Assert.assertEquals(newUser, myBook.getLoanee());
+		myBook.setLoanee(u1);
+		Assert.assertEquals(u1, myBook.getLoanee());
 	}
 	
 	
@@ -137,9 +138,8 @@ public class BookTest{
 	public void teardown()
 	{
 		myBook = null;
-		newUser = null;
-		Andy = null;
-		genre = null;
-		newGenre = null;
+		genre = newGenre = null;
+		u = u1 = null;
+		date = date2 = null;
 	}
 }

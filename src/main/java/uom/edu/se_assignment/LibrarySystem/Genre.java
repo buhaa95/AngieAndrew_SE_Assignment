@@ -1,6 +1,5 @@
 package uom.edu.se_assignment.LibrarySystem;
 
-
 public enum Genre 
 {	
 	COMEDY,
