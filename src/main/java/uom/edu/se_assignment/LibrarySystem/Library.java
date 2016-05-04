@@ -35,11 +35,8 @@ public class Library
 	
 	
 	public void addBook(Book b)
-	{
-		if (isValidBookId(b.getBookId()))
-			Catalogue.addBook(b);
-		else 
-			throw new IllegalArgumentException("User with this ID already exists");
+	{		
+		Catalogue.addBook(b);
 	}
 	
 	public void removeUser(User u)
@@ -125,18 +122,6 @@ public class Library
 		for (final User u: users)
 		{
 			if(u.getIdNumber() == id) return false;
-		}
-		return true;
-	}
-	
-	private boolean isValidBookId(int id)
-	{		
-		if (cat.getAllBooks() == null)
-			return true;
-		
-		for (final Book b: cat.getAllBooks())
-		{
-			if(b.getBookId() == id) return false;
 		}
 		return true;
 	}

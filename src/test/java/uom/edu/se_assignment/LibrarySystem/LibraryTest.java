@@ -47,6 +47,11 @@ public class LibraryTest {
 		u7 = new User(2459, "Francis Camilleri", "Birgu", "45623 20356");
 	}
 	
+	/**
+	 * Tets are renamed to begin with a letter. This will determine the order the the tests are run.
+	 * If the time permits the developers will work on a cleaner solution to this problem. 
+	 */
+	
 	@Test
 	public void A_addUserTestValid1(){
 		//adding user to an empty users list
@@ -82,10 +87,10 @@ public class LibraryTest {
 	
 	@Test
 	public void D_addBookTestValid1(){
-		//adding book to an empty book list
-		Assert.assertEquals(0, cat.getAllBooks().size());
+		//adding book to list
+		Assert.assertEquals(5, cat.getAllBooks().size());
 		lib.addBook(b);
-		Assert.assertEquals(1, cat.getAllBooks().size());
+		Assert.assertEquals(6, cat.getAllBooks().size());
 	}
 	
 	@Test
@@ -100,18 +105,20 @@ public class LibraryTest {
 		lib.addBook(b8);
 		
 		
-		Assert.assertEquals(8, cat.getAllBooks().size());
+		Assert.assertEquals(13, cat.getAllBooks().size());
 		
 	}
 	
-	@Test (expected = IllegalArgumentException.class)
-	public void F_addBookTestInValid() throws Exception
+	@Test
+	public void F_addBookTestInValid()
 	{
 		lib.addBook(b);
 		lib.addBook(b1);
 		lib.addBook(b2);
 		lib.addBook(b3);
 		lib.addBook(b4);
+		
+		Assert.assertEquals(13, cat.getAllBooks().size());
 	}
 	
 	@Test

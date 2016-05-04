@@ -12,7 +12,7 @@ public class Catalogue
 	//static method to provide access
 	public static Catalogue getInstance()
 	{
-		if (instance==null)
+		if (instance == null)
 			instance = new Catalogue();
 		
 		return instance;
@@ -26,15 +26,15 @@ public class Catalogue
 	
 	public static void addBook(Book b)
 	{
-		collection.add(b);
+		if (isValidBookId(b.getBookId()))
+			collection.add(b);
+		else 
+			return;
 	}
 	
 	public List<Book> getAllBooks() 
 	{
-		List<Book> list = new ArrayList<Book>();
-		for (Book b: collection)
-			list.add(b);
-		return list;
+		return collection;
 	}
 	
 	public List<Book> searchByTitle(String word)
@@ -79,4 +79,16 @@ public class Catalogue
 		}
 		return myList;
 	}	
+	
+	private static boolean isValidBookId(int id)
+	{		
+		if (collection == null)
+			return true;
+		
+		for (final Book b: collection)
+		{
+			if(b.getBookId() == id) return false;
+		}
+		return true;
+	}
 }
