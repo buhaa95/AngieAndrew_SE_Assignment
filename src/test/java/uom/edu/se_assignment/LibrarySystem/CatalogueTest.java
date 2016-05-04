@@ -11,7 +11,7 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CatalogueTest {
 	Catalogue catalogue;
-	Book b, b1, b2, b3;
+	//Book b, b1, b2, b3;
 	
 	@Before
 	public void startup()
@@ -22,7 +22,7 @@ public class CatalogueTest {
 		 * follow in this suite. Therefore we do not need to create anymore instances of books
 		 */
 		
-		//user arguments are set to null as it is beyond the purpose of this test suite to test user objects
+		/*//user arguments are set to null as it is beyond the purpose of this test suite to test user objects
 		
 		b = new Book(27,"Harry Potter and the Half Blood Prince", "J.K. Rowling", Genre.FICTION, 2008, 1, null, null);
 	    b1 = new Book(48,"Lord of the Rings", "J.R.R Tolkien", Genre.FICTION, 2005, 1, null, null); 
@@ -32,7 +32,7 @@ public class CatalogueTest {
 		Catalogue.addBook(b);
 		Catalogue.addBook(b1);
 		Catalogue.addBook(b2);
-		Catalogue.addBook(b3);
+		Catalogue.addBook(b3);*/
 	}
 	
 	@Test
