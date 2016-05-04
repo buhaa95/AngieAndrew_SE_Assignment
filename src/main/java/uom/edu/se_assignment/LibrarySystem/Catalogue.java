@@ -5,13 +5,26 @@ import java.util.List;
 
 public class Catalogue 
 {
-	private List<Book> collection;
+	//created a static property referring to an instance of the null class
+	public static Catalogue instance = null;
+	private static List<Book> collection;
 	
-	public Catalogue() {
+	//static method to provide access
+	public static Catalogue getInstance()
+	{
+		if (instance==null)
+			instance = new Catalogue();
+		
+		return instance;
+	}
+	
+	//constructor changed to private so it cannot be called from another class
+	private Catalogue() 
+	{
 		collection = new ArrayList<Book>();
 	}
 	
-	public void addBook(Book b)
+	public static void addBook(Book b)
 	{
 		collection.add(b);
 	}
@@ -19,7 +32,8 @@ public class Catalogue
 	public List<Book> getAllBooks() 
 	{
 		List<Book> list = new ArrayList<Book>();
-		list.addAll(collection);
+		for (Book b: collection)
+			list.add(b);
 		return list;
 	}
 	
@@ -44,7 +58,7 @@ public class Catalogue
 		
 		for(final Book b: collection)
 		{
-			if(b.getGenre()== genre)
+			if(b.getGenre().equals(genre))
 			{
 				myList.add(b);
 			}

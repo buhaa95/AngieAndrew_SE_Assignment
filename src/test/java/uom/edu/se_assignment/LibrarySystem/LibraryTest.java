@@ -7,18 +7,23 @@ import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LibraryTest {
 	Library lib;
 	Book b, b1, b2, b3, b4, b5, b6, b7, b8;
 	User u,u1,u2,u3,u4,u5,u6,u7;
 	Date date;
+	Catalogue cat;
 	
 	@Before
 	public void setup()
 	{
 		lib = new Library();
+		cat = Catalogue.getInstance();
 		
 		// LoanOutDate and User are set to null upon creation. They will be changed accordingly in the test cases. 
 		b = new Book(27,"Harry Potter and the Half Blood Prince", "J.K. Rowling", Genre.FICTION, 2008, 1, null, null);
@@ -43,7 +48,7 @@ public class LibraryTest {
 	}
 	
 	@Test
-	public void addUserTestValid1(){
+	public void A_addUserTestValid1(){
 		//adding user to an empty users list
 		Assert.assertEquals(0, lib.getUsers().size());
 		lib.addUser(u);
@@ -51,7 +56,7 @@ public class LibraryTest {
 	}
 		
 	@Test
-	public void addUserTestValid2()
+	public void B_addUserTestValid2()
 	{
 		lib.addUser(u);
 		lib.addUser(u1);
@@ -66,7 +71,7 @@ public class LibraryTest {
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
-	public void addUserTestInValid() throws Exception
+	public void C_addUserTestInValid() throws Exception
 	{
 		lib.addUser(u);
 		lib.addUser(u1);
@@ -76,17 +81,16 @@ public class LibraryTest {
 	}
 	
 	@Test
-	public void adBookTestValid1(){
+	public void D_addBookTestValid1(){
 		//adding book to an empty book list
-		Assert.assertEquals(0, lib.collection.size());
+		Assert.assertEquals(0, cat.getAllBooks().size());
 		lib.addBook(b);
-		Assert.assertEquals(1, lib.collection.size());
+		Assert.assertEquals(1, cat.getAllBooks().size());
 	}
 	
 	@Test
-	public void addBookTestValid2()
+	public void E_addBookTestValid2()
 	{
-		lib.addBook(b);
 		lib.addBook(b1);
 		lib.addBook(b2);
 		lib.addBook(b3);
@@ -96,12 +100,12 @@ public class LibraryTest {
 		lib.addBook(b8);
 		
 		
-		Assert.assertEquals(8, lib.collection.size());
+		Assert.assertEquals(8, cat.getAllBooks().size());
 		
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
-	public void addBookTestInValid() throws Exception
+	public void F_addBookTestInValid() throws Exception
 	{
 		lib.addBook(b);
 		lib.addBook(b1);
@@ -111,7 +115,7 @@ public class LibraryTest {
 	}
 	
 	@Test
-	public void removeUserValid()
+	public void G_removeUserValid()
 	{
 		lib.addUser(u);
 		lib.addUser(u1);
@@ -128,7 +132,7 @@ public class LibraryTest {
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
-	public void removeUserInValid()
+	public void H_removeUserInValid()
 	{
 		lib.addUser(u);
 		lib.addUser(u1);
@@ -143,7 +147,7 @@ public class LibraryTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void loanBookToInValid1() 
+	public void I_loanBookToInValid1() 
 	{
 		// book already loaned out 
 		
@@ -154,7 +158,7 @@ public class LibraryTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void loanBookToInValid2() 
+	public void J_loanBookToInValid2() 
 	{
 		// user has already 3 books
 		
@@ -166,7 +170,7 @@ public class LibraryTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void loanBookToInValid3() 
+	public void K_loanBookToInValid3() 
 	{
 		// book has exceeded 4 weeks
 		date = new GregorianCalendar(2016,Calendar.JANUARY,11).getTime();
@@ -177,7 +181,7 @@ public class LibraryTest {
 	}
 	
 	@Test
-	public void loanBookToValid()
+	public void L_loanBookToValid()
 	{
 		lib.loanBookTo(b, u);
 		
@@ -187,31 +191,31 @@ public class LibraryTest {
 	
 	
 	@Test
-	public void returnBookValid()
+	public void M_returnBookValid()
 	{
-		lib.addBook(b);
-		lib.loanBookTo(b, u);
-		lib.returnBook(b);
+		lib.loanBookTo(b1, u);
+		lib.returnBook(b1);
 		
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
-	public void returnBookInValid1()
+	public void N_returnBookInValid1()
 	{
-		lib.addBook(b);
-		lib.returnBook(b);
+		//returning a book which is already returned
+		lib.returnBook(b1);
 	}
 	
 	
 	@Test (expected = IllegalArgumentException.class)
-	public void returnBookInValid2()
+	public void O_returnBookInValid2()
 	{
-		lib.loanBookTo(b, u);
-		lib.returnBook(b);
+		//returning book not in collection
+		//lib.loanBookTo(b1, u);
+		lib.returnBook(b4);
 	}
 	
 	@Test
-	public void getBooksOnLoan()
+	public void P_getBooksOnLoan()
 	{
 		lib.loanBookTo(b, u);
 		lib.loanBookTo(b1, u);
@@ -221,7 +225,7 @@ public class LibraryTest {
 	}
 	
 	@Test
-	public void getUsers()
+	public void Q_getUsers()
 	{
 		lib.addUser(u);
 		lib.addUser(u1);
