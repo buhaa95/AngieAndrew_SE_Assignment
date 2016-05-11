@@ -80,19 +80,20 @@ public class Library
 				b.setLoanOutDate(null);
 				b.setLoanee(null);
 				b.setOnLoan(false);
-				b.removeObserver((Observer) u);
 				
 				if(b.getWaitingList().size() > 0)
-				{
-					//removing observer object from waiting list and casting it to user
-					loanBookTo(b, (User)b.getWaitingList().poll());
-					
-					ArrayList<Observer> list = new ArrayList<Observer>(b.getWaitingList());
-					
-					for(Observer o: list)
-						o.update(list.indexOf(o));
+				{			
+					loanBookTo(b,(User)b.getWaitingList().peek());
+					b.removeObserver((Observer) u);					
 				}
 				
+				if (b.getWaitingList().size() > 0) 
+				{
+					ArrayList<Observer> list = new ArrayList<Observer>(b.getWaitingList());
+
+					for (Observer o : list)
+						o.update(list.indexOf(o));
+				}
 			}else throw new IllegalArgumentException("Book is not from this Libarary's collection");
 		}else throw new IllegalArgumentException("User has not borrowed this book. Cannot return it.");
 	}
