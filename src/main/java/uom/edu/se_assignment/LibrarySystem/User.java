@@ -3,13 +3,20 @@ package uom.edu.se_assignment.LibrarySystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User
+public class User implements Observer
 {
 	private int idNumber;
 	private String FullName;
 	private String Address;
 	private String ContactNumber;
 	private List<Book> listOfBurrowedBooks = new ArrayList<Book>();
+	
+	private Observable observable = null;
+	
+	public User (Observable observable)
+	{
+		this.observable = observable;
+	}
 	
 	User(int id, String name, String address, String contact)
 	{
@@ -72,5 +79,10 @@ public class User
 	public void removeBook(Book b)
 	{
 		listOfBurrowedBooks.remove(b);
+	}
+
+	public void update(int pos) 
+	{
+		System.out.println("Your position is now: " /*+ position*/);
 	}
 }

@@ -1,9 +1,10 @@
 package uom.edu.se_assignment.LibrarySystem;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Book /*implements Observable*/
+public class Book implements Observable
 {
 	private int bookId;	
 	private String Title;
@@ -118,7 +119,11 @@ public class Book /*implements Observable*/
 	public void setOnLoan(boolean isOnLoan) 
 	{
 		this.isOnLoan = isOnLoan;
-		//update();
+	}
+	
+	public Queue<Observer> getWaitingList() 
+	{
+		return waitingList;
 	}
 	
 	public void addObserver(Observer o)
@@ -130,9 +135,15 @@ public class Book /*implements Observable*/
 	{
 		waitingList.poll();
 	}
-	
-	public Queue<Observer> getWaitingList() 
+		
+	public void notifyObserver(Observer o)
 	{
-		return waitingList;
+		//storing
+		ArrayList<Observer> list = new ArrayList<Observer>(waitingList);
+		
+		for (Object ob: list)
+		{
+			o.update(list.indexOf(ob));
+		}
 	}
 }
