@@ -4,24 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Library /*implements Observer*/
+public class Library
 {
 	protected List<Book> booksOnLoan;
 	private List<User> users;
 	private Catalogue cat = Catalogue.getInstance();
-	
-	//private Observable observable = null;
 	
 	public Library()
 	{
 		booksOnLoan = new ArrayList<Book>();
 		users = new ArrayList<User>();
 	}
-	
-	/*public Library(Observable observable)
-	{
-		this.observable = observable;
-	}*/
 
 	public List<Book> getBooksOnLoan() 
 	{
@@ -32,10 +25,6 @@ public class Library /*implements Observer*/
 	{
 		return users;
 	}
-	
-	/*public void update(Book b, User u){
-		loanBookTo((Book)b.getWaitingList().poll(), u);
-	}*/
 	
 	public void addUser(User u)
 	{
@@ -60,7 +49,12 @@ public class Library /*implements Observer*/
 	
 	public void loanBookTo(Book b, User u)
 	{
-		if(!b.getIsOnLoan() && canBurrow(u))
+		if(b.getIsOnLoan() && canBurrow(u))
+		{
+			//adding to waiting list
+			b.addObserver((Observer) u);
+		}
+		else if(!b.getIsOnLoan() && canBurrow(u))
 		{
 			Date date = new Date();
 			
@@ -86,10 +80,24 @@ public class Library /*implements Observer*/
 				b.setLoanOutDate(null);
 				b.setLoanee(null);
 				b.setOnLoan(false);
+				b.removeObserver((Observer) u);
+				
+				if(b.getWaitingList().size() > 0)
+				{
+					//removing observer object from waiting list and casting it to user
+					loanBookTo(b, (User)b.getWaitingList().poll());
+					
+					ArrayList<Observer> list = new ArrayList<Observer>(b.getWaitingList());
+					
+					for(Observer o: list)
+						o.update(list.indexOf(o));
+				}
 				
 			}else throw new IllegalArgumentException("Book is not from this Libarary's collection");
 		}else throw new IllegalArgumentException("User has not borrowed this book. Cannot return it.");
 	}
+	
+	
 	
 	//HELPER FUNCTIONS
 	private boolean isFromCollection(Book b)
@@ -131,11 +139,5 @@ public class Library /*implements Observer*/
 			if(u.getIdNumber() == id) return false;
 		}
 		return true;
-	}
-
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	}	
 }
