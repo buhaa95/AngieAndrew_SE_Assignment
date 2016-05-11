@@ -1,9 +1,7 @@
 package uom.edu.se_assignment.LibrarySystem;
 import java.util.Date;
-//import java.util.LinkedList;
-//import java.util.Queue;
 
-public class Book /*implements Observable*/{
+public class Book {
 	private int bookId;	
 	private String Title;
 	private String Author;
@@ -12,10 +10,6 @@ public class Book /*implements Observable*/{
 	private int Edition;
 	private User Loanee;
 	private Date LoanOutDate;
-	
-	private boolean isOnLoan;
-	
-	//private Queue<Observer> waitingList = new LinkedList<Observer>();
 	
 	Book(int id, String t, String a, Genre g, int y, int e, User l, Date d)
 	{
@@ -113,14 +107,6 @@ public class Book /*implements Observable*/{
 	{
 		this.LoanOutDate = LoanOutDate;
 		
-	}
-
-	public boolean getIsOnLoan() {
-		return isOnLoan;
-	}
-
-	public void setOnLoan(boolean isOnLoan) {
-		this.isOnLoan = isOnLoan;
 	}	
 	
 }

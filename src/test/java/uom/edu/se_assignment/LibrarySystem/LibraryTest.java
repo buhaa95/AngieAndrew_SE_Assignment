@@ -160,7 +160,6 @@ public class LibraryTest {
 		
 		lib.addBook(b1);
 		lib.booksOnLoan.add(b1);
-		b1.setOnLoan(true);
 		
 		lib.loanBookTo(b1,u1);
 	}
