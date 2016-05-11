@@ -1,9 +1,12 @@
 package uom.edu.se_assignment.LibrarySystem;
 import java.util.Date;
-//import java.util.LinkedList;
-//import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Queue;
 
-public class Book /*implements Observable*/{
+public class Book implements Observer
+{
 	private int bookId;	
 	private String Title;
 	private String Author;
@@ -12,11 +15,10 @@ public class Book /*implements Observable*/{
 	private int Edition;
 	private User Loanee;
 	private Date LoanOutDate;
-	
 	private boolean isOnLoan;
 	
-	//private Queue<Observer> waitingList = new LinkedList<Observer>();
-	
+	private Queue<Observer> waitingList = new LinkedList<Observer>();
+
 	Book(int id, String t, String a, Genre g, int y, int e, User l, Date d)
 	{
 		// validation for id
@@ -115,12 +117,42 @@ public class Book /*implements Observable*/{
 		
 	}
 
-	public boolean getIsOnLoan() {
+	public boolean getIsOnLoan() 
+	{
 		return isOnLoan;
 	}
 
-	public void setOnLoan(boolean isOnLoan) {
+	public void setOnLoan(boolean isOnLoan) 
+	{
 		this.isOnLoan = isOnLoan;
-	}	
+		notifyObserver();
+	}
 	
+	public void addObserver(Observer o)
+	{
+		waitingList.add(o);
+	}
+
+	public void removeObserver(Observer o)
+	{
+		waitingList.poll();
+	}
+	
+	public void notifyObserver()
+	{
+		for(Observer u: waitingList)
+		{
+			u.update(null, u);
+		}
+	}
+	
+	public Queue<Observer> getWaitingList() 
+	{
+		return waitingList;
+	}
+
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -3,18 +3,27 @@ package uom.edu.se_assignment.LibrarySystem;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Library 
+public class Library implements Observer
 {
 	protected List<Book> booksOnLoan;
 	private List<User> users;
 	private Catalogue cat = Catalogue.getInstance();
+	
+	//private Observable observable = null;
 	
 	public Library()
 	{
 		booksOnLoan = new ArrayList<Book>();
 		users = new ArrayList<User>();
 	}
+	
+	/*public Library(Observable observable)
+	{
+		this.observable = observable;
+	}*/
 
 	public List<Book> getBooksOnLoan() 
 	{
@@ -24,6 +33,10 @@ public class Library
 	public List<User> getUsers() 
 	{
 		return users;
+	}
+	
+	public void update(Book b, User u){
+		loanBookTo((Book)b.getWaitingList().poll(), u);
 	}
 	
 	public void addUser(User u)
@@ -120,6 +133,11 @@ public class Library
 			if(u.getIdNumber() == id) return false;
 		}
 		return true;
+	}
+
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
