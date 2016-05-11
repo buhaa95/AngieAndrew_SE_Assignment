@@ -163,6 +163,19 @@ public class LibraryTest {
 		//b1 should have a waiting list with size 1 now
 		Assert.assertEquals(1, b1.getWaitingList().size());
 	}
+	/*
+	 * Test method to test that once a book is returned, the first user in the waiting list gets it
+	 */
+	
+	@Test
+	public void IJ_returnBookAndLoanAgain()
+	{
+		lib.loanBookTo(b1, u2);
+		lib.loanBookTo(b1,u1);
+		lib.returnBook(b1);
+		
+		Assert.assertEquals(u1, b1.getLoanee());
+	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void J_loanBookToInValid2() 
@@ -200,9 +213,10 @@ public class LibraryTest {
 	@Test
 	public void M_returnBookValid()
 	{
-		lib.loanBookTo(b1, u);
-		lib.returnBook(b1);
+		lib.loanBookTo(b8, u);
+		lib.returnBook(b8);
 		
+		Assert.assertFalse(b8.getIsOnLoan());
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
