@@ -49,12 +49,13 @@ public class Library
 	
 	public void loanBookTo(Book b, User u)
 	{
-		if(!isOnLoan(b) && canBurrow(u))
+		if(!b.getIsOnLoan() && canBurrow(u))
 		{
 			Date date = new Date();
 			
 			b.setLoanee(u);
 			b.setLoanOutDate(date);
+			b.setOnLoan(true);
 			u.addBook(b);
 			booksOnLoan.add(b);
 		}
@@ -64,7 +65,7 @@ public class Library
 	
 	public void returnBook (Book b)
 	{
-		if (booksOnLoan.contains(b))
+		if (b.getIsOnLoan())
 		{
 			if (isFromCollection(b))
 			{
@@ -73,18 +74,13 @@ public class Library
 				booksOnLoan.remove(b);
 				b.setLoanOutDate(null);
 				b.setLoanee(null);
+				b.setOnLoan(false);
 				
 			}else throw new IllegalArgumentException("Book is not from this Libarary's collection");
 		}else throw new IllegalArgumentException("User has not borrowed this book. Cannot return it.");
 	}
 	
 	//HELPER FUNCTIONS
-	
-	private boolean isOnLoan(Book b)
-	{
-		return booksOnLoan.contains(b);
-	}
-	
 	private boolean isFromCollection(Book b)
 	{
 		List<Book> list = cat.getAllBooks();
