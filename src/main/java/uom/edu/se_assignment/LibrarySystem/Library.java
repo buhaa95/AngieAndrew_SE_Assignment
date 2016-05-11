@@ -3,10 +3,8 @@ package uom.edu.se_assignment.LibrarySystem;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public class Library implements Observer
+public class Library /*implements Observer*/
 {
 	protected List<Book> booksOnLoan;
 	private List<User> users;
@@ -35,9 +33,9 @@ public class Library implements Observer
 		return users;
 	}
 	
-	public void update(Book b, User u){
+	/*public void update(Book b, User u){
 		loanBookTo((Book)b.getWaitingList().poll(), u);
-	}
+	}*/
 	
 	public void addUser(User u)
 	{

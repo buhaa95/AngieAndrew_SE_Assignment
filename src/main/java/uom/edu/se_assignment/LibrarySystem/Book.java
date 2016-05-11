@@ -1,11 +1,9 @@
 package uom.edu.se_assignment.LibrarySystem;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Queue;
 
-public class Book implements Observer
+public class Book /*implements Observable*/
 {
 	private int bookId;	
 	private String Title;
@@ -35,11 +33,6 @@ public class Book implements Observer
 	public int getBookId() {
 		return bookId;
 	}
-
-	//no need for id setter because id is unique and cannot be changed
-	/*public void setBookId(int bookId) {
-		this.bookId = bookId;
-	}*/
 
 	public String getTitle() {
 		
@@ -125,7 +118,7 @@ public class Book implements Observer
 	public void setOnLoan(boolean isOnLoan) 
 	{
 		this.isOnLoan = isOnLoan;
-		notifyObserver();
+		//update();
 	}
 	
 	public void addObserver(Observer o)
@@ -138,21 +131,8 @@ public class Book implements Observer
 		waitingList.poll();
 	}
 	
-	public void notifyObserver()
-	{
-		for(Observer u: waitingList)
-		{
-			u.update(null, u);
-		}
-	}
-	
 	public Queue<Observer> getWaitingList() 
 	{
 		return waitingList;
-	}
-
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 }
