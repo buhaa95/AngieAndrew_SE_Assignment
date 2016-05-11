@@ -153,16 +153,15 @@ public class LibraryTest {
 		
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void I_loanBookToInValid1() 
 	{
 		// book already loaned out 
-		
-		lib.addBook(b1);
-		lib.booksOnLoan.add(b1);
-		b1.setOnLoan(true);
-		
+		lib.loanBookTo(b1, u2);
 		lib.loanBookTo(b1,u1);
+		
+		//b1 should have a waiting list with size 1 now
+		Assert.assertEquals(1, b1.getWaitingList().size());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
