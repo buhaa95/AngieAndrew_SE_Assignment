@@ -49,7 +49,6 @@ public class LibraryTest {
 	
 	/**
 	 * Tets are renamed to begin with a letter. This will determine the order the the tests are run.
-	 * If the time permits the developers will work on a cleaner solution to this problem. 
 	 */
 	
 	@Test

@@ -85,10 +85,7 @@ public class Library
 			{
 				loanBookTo(b, (User) b.getWaitingList().peek());
 				b.removeObserver((Observer) u);
-			}
-
-			if (b.getWaitingList().size() > 0) 
-			{
+				
 				ArrayList<Observer> list = new ArrayList<Observer>(b.getWaitingList());
 				for (Observer o : list)
 					b.notifyObserver(o);
