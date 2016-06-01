@@ -81,10 +81,7 @@ public class Catalogue
 	}	
 	
 	private static boolean isValidBookId(int id)
-	{		
-		if (collection == null)
-			return true;
-		
+	{	
 		for (final Book b: collection)
 		{
 			if(b.getBookId() == id) return false;

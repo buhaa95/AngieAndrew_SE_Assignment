@@ -13,7 +13,7 @@ public class BookTest{
 	
 	Book myBook;
 	Genre genre, newGenre;
-	User u, u1;
+	User u, u1,u2,u3;
 	Date date, date2;
 	
 	@Before 
@@ -22,8 +22,10 @@ public class BookTest{
 		genre = Genre.FICTION;
 		newGenre = Genre.MYSTERY;
 		
-		u = new User(4877, "Andy Hill", "Qawra", "55887789");
-		u1 = new User(4455, "Connie Buttigieg", "Marsaxlokk", "00356 88998899");
+		u = new User(1234, "Mary Sammut", "Nadur", "123456789");
+		u1 = new User(1, "John Smith", "Mosta", "00356 79007789");
+		u2 = new User(15, "Ronald Briffa", "Kalkara", "0078 99856634");
+		u3 = new User(22, "Kimberly Sultana", "Sliema", "006589775");
 		
 		date = new GregorianCalendar(2016, Calendar.JANUARY, 21).getTime();
 		date2 = new GregorianCalendar(2016, Calendar.FEBRUARY,17).getTime();
@@ -132,6 +134,26 @@ public class BookTest{
 	{
 		myBook.setLoanOutDate(date2);
 		Assert.assertEquals(date2, myBook.getLoanOutDate());
+	}
+	
+	@Test
+	public void notifyObserverTest()
+	{
+		//assume myBook has a waiting list
+		myBook.addObserver(u);
+		myBook.addObserver(u1);
+		myBook.addObserver(u2);
+		myBook.addObserver(u3);
+		
+		myBook.notifyObserver(u);
+		myBook.notifyObserver(u1);
+		myBook.notifyObserver(u2);
+		myBook.notifyObserver(u3);	
+		
+		Assert.assertEquals(1, u.getPosition());
+		Assert.assertEquals(2, u1.getPosition());
+		Assert.assertEquals(3, u2.getPosition());
+		Assert.assertEquals(4, u3.getPosition());
 	}
 	
 	@After

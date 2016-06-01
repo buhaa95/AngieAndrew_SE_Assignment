@@ -138,12 +138,7 @@ public class Book implements Observable
 		
 	public void notifyObserver(Observer o)
 	{
-		//storing
-		ArrayList<Observer> list = new ArrayList<Observer>(waitingList);
-		
-		for (Object ob: list)
-		{
-			o.update(list.indexOf(ob));
-		}
-	}
+		ArrayList <Observer> list = new ArrayList<Observer>(waitingList);
+		o.update(list.indexOf(o) + 1);
+	}	
 }

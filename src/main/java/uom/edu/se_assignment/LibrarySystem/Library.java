@@ -30,7 +30,7 @@ public class Library
 	{
 		if(isValidUserId(u.getIdNumber())) 
 			users.add(u);
-		else throw new IllegalArgumentException("User with this ID already exists");
+		//else add nothing
 	}
 	
 	
@@ -44,7 +44,8 @@ public class Library
 		if (users.contains(u))
 		{
 			users.remove(u);
-		}else throw new IllegalArgumentException("User not found!");
+		}
+		//else nothing to remove
 	}
 	
 	public void loanBookTo(Book b, User u)
@@ -68,48 +69,48 @@ public class Library
 				+ "User is not allowed to burrow any more books for now.");
 	}
 	
+	//removed exceptions 
 	public void returnBook (Book b)
 	{
-		if (b.getIsOnLoan())
+		if (b.getIsOnLoan() && isFromCollection(b)) 
 		{
-			if (isFromCollection(b))
-			{
-				User u = b.getLoanee();
-				u.removeBook(b);
-				booksOnLoan.remove(b);
-				b.setLoanOutDate(null);
-				b.setLoanee(null);
-				b.setOnLoan(false);
-				
-				if(b.getWaitingList().size() > 0)
-				{			
-					loanBookTo(b,(User)b.getWaitingList().peek());
-					b.removeObserver((Observer) u);					
-				}
-				
-				if (b.getWaitingList().size() > 0) 
-				{
-					ArrayList<Observer> list = new ArrayList<Observer>(b.getWaitingList());
+			User u = b.getLoanee();
+			u.removeBook(b);
+			booksOnLoan.remove(b);
+			b.setLoanOutDate(null);
+			b.setLoanee(null);
+			b.setOnLoan(false);
 
-					for (Observer o : list)
-						o.update(list.indexOf(o));
-				}
-			}else throw new IllegalArgumentException("Book is not from this Libarary's collection");
-		}else throw new IllegalArgumentException("User has not borrowed this book. Cannot return it.");
+			if (b.getWaitingList().size() > 0) 
+			{
+				loanBookTo(b, (User) b.getWaitingList().peek());
+				b.removeObserver((Observer) u);
+			}
+
+			if (b.getWaitingList().size() > 0) 
+			{
+				ArrayList<Observer> list = new ArrayList<Observer>(b.getWaitingList());
+				for (Observer o : list)
+					b.notifyObserver(o);
+			}
+		}
 	}
-	
 	
 	
 	//HELPER FUNCTIONS
 	private boolean isFromCollection(Book b)
 	{
+		boolean flag = false;
 		List<Book> list = cat.getAllBooks();
 		for(Book book: list)
 		{
 			if(book.getBookId() == b.getBookId())
-				return true;
+			{
+				flag = true;
+				break;
+			}
 		}
-		return false;
+		return flag;
 	}
 	
 	private boolean canBurrow(User u)
@@ -131,10 +132,7 @@ public class Library
 	}
 	
 	private boolean isValidUserId(int id)
-	{		
-		if (users == null)
-			return true;
-		
+	{
 		for (final User u: users)
 		{
 			if(u.getIdNumber() == id) return false;

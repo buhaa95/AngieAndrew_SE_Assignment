@@ -75,14 +75,16 @@ public class LibraryTest {
 		
 	}
 	
-	@Test (expected = IllegalArgumentException.class)
-	public void C_addUserTestInValid() throws Exception
+	@Test
+	public void C_addUserTestInValid()
 	{
 		lib.addUser(u);
 		lib.addUser(u1);
 		lib.addUser(u2);
 		lib.addUser(u3);
 		lib.addUser(u4);
+		
+		Assert.assertEquals(4, lib.getUsers().size());
 	}
 	
 	@Test
@@ -138,7 +140,8 @@ public class LibraryTest {
 		
 	}
 	
-	@Test (expected = IllegalArgumentException.class)
+	//removing a user not in list
+	@Test
 	public void H_removeUserInValid()
 	{
 		lib.addUser(u);
@@ -150,6 +153,8 @@ public class LibraryTest {
 		lib.addUser(u7);
 		
 		lib.removeUser(u4);
+		
+		Assert.assertEquals(7, lib.getUsers().size());
 		
 	}
 	
@@ -163,6 +168,8 @@ public class LibraryTest {
 		//b1 should have a waiting list with size 1 now
 		Assert.assertEquals(1, b1.getWaitingList().size());
 	}
+	
+	
 	/*
 	 * Test method to test that once a book is returned, the first user in the waiting list gets it
 	 */
@@ -177,7 +184,7 @@ public class LibraryTest {
 		Assert.assertEquals(u1, b1.getLoanee());
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test (expected = IllegalArgumentException.class)
 	public void J_loanBookToInValid2() 
 	{
 		// user has already 3 books
@@ -189,7 +196,7 @@ public class LibraryTest {
 		lib.loanBookTo(b2,u2);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test (expected = IllegalArgumentException.class)
 	public void K_loanBookToInValid3() 
 	{
 		// book has exceeded 4 weeks
@@ -219,7 +226,19 @@ public class LibraryTest {
 		Assert.assertFalse(b8.getIsOnLoan());
 	}
 	
-	@Test (expected = IllegalArgumentException.class)
+	//returning a book which has a long waiting list
+	@Test
+	public void N_returnBookValid2()
+	{
+		lib.loanBookTo(b8, u);
+		lib.loanBookTo(b8, u1);
+		lib.loanBookTo(b8, u2);
+		lib.loanBookTo(b8, u3);
+		
+		lib.returnBook(b8);
+	}
+	
+	@Test
 	public void N_returnBookInValid1()
 	{
 		//returning a book which is already returned
@@ -227,7 +246,7 @@ public class LibraryTest {
 	}
 	
 	
-	@Test (expected = IllegalArgumentException.class)
+	@Test
 	public void O_returnBookInValid2()
 	{
 		//returning book not in collection

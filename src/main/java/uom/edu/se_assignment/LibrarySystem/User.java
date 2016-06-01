@@ -10,13 +10,7 @@ public class User implements Observer
 	private String Address;
 	private String ContactNumber;
 	private List<Book> listOfBurrowedBooks = new ArrayList<Book>();
-	
-	private Observable observable = null;
-	
-	public User (Observable observable)
-	{
-		this.observable = observable;
-	}
+	private int position; 
 	
 	User(int id, String name, String address, String contact)
 	{
@@ -81,8 +75,15 @@ public class User implements Observer
 		listOfBurrowedBooks.remove(b);
 	}
 
+	//used to update each observer with their new position in the waiting list
 	public void update(int pos) 
 	{
-		System.out.println("Your position is now: " /*+ position*/);
+		this.position = pos;
+	}
+	
+	//method added for testing
+	public int getPosition()
+	{
+		return position;
 	}
 }
