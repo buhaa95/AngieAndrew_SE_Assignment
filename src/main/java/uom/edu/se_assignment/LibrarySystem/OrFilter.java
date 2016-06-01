@@ -2,7 +2,7 @@ package uom.edu.se_assignment.LibrarySystem;
 
 import java.util.List;
 
-public class OrFilter 
+public class OrFilter implements FilterCriteria 
 {
 	private FilterCriteria c1;
 	private FilterCriteria c2;

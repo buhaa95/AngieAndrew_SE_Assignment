@@ -12,6 +12,8 @@ public class CatalogueTest {
 	YearFilter yearFilter;
 	AuthorFilter authorFilter;
 	TitleFilter titleFilter;
+	AndFilter andFilter;
+	OrFilter orFilter;
 	
 	@Before
 	public void startup()
@@ -36,6 +38,9 @@ public class CatalogueTest {
 		yearFilter = new YearFilter();
 		titleFilter = new TitleFilter();
 		authorFilter = new AuthorFilter();
+		
+		andFilter = new AndFilter(genreFilter, authorFilter);
+		orFilter = new OrFilter(genreFilter, yearFilter);
 	}
 	
 	@Test
@@ -66,6 +71,21 @@ public class CatalogueTest {
 	public void searchByAuthorTest()
 	{
 		Assert.assertEquals(2, catalogue.searchForBooks(authorFilter, "Rowling").size());		
+	}
+	
+	//Testing for two criteria using and. Filtering fiction books which are written by J.K. Rowling
+	@Test
+	public void andFilterTest()
+	{
+		Assert.assertEquals(2, catalogue.searchForBooks(andFilter, Genre.FICTION.getGenreText(), "Rowling").size());
+	}
+	
+	//Testing for two criteria using or. Filtering fiction books and bood written in 2005
+	//therfore method should return all books for this case
+	@Test
+	public void orFilterTest() 
+	{
+		Assert.assertEquals(5, catalogue.searchForBooks(orFilter, Genre.FICTION.getGenreText(), "2005").size());
 	}
 	
 	@After

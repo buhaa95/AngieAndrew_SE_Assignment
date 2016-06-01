@@ -42,6 +42,11 @@ public class Catalogue
 		return filter.filterCriteria(collection, keyword);
 	}
 	
+	public List<Book> searchForBooks(FilterCriteria filter, String keyword, String keyword2)
+	{
+		return filter.filterCriteria(collection, keyword, keyword2);
+	}
+	
 	/* Following code is not required anymore
 	public List<Book> searchByTitle(String word)
 	{
