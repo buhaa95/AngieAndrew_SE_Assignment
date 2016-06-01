@@ -2,7 +2,7 @@ package uom.edu.se_assignment.LibrarySystem;
 
 import java.util.List;
 
-public class OrFilter implements FilterCriteria 
+public class OrFilter extends FilterCriteria 
 {
 	private FilterCriteria c1;
 	private FilterCriteria c2;
@@ -13,11 +13,7 @@ public class OrFilter implements FilterCriteria
 		this.c2 = c2;
 	}
 	
-	public List<Book> filterCriteria(List<Book> bookList, String keyword)
-	{
-		return null;
-	}
-	
+	@Override	
 	public List<Book> filterCriteria(List<Book> bookList, String keyword, String keyword2) 
 	{
 		//list returned from first filter

@@ -3,8 +3,9 @@ package uom.edu.se_assignment.LibrarySystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenreFilter implements FilterCriteria
+public class GenreFilter extends FilterCriteria
 {
+	@Override
 	public List<Book> filterCriteria(List<Book> bookList, String keyword)
 	{
 		Genre genre = Genre.valueOf(keyword.toUpperCase());
@@ -16,10 +17,5 @@ public class GenreFilter implements FilterCriteria
 				genreBookList.add(b);
 		}
 		return genreBookList;
-	}
-	
-	public List<Book> filterCriteria(List<Book> bookList, String keyword, String keyword2)
-	{
-		return null;
 	}
 }

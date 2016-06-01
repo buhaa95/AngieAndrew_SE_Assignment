@@ -3,8 +3,9 @@ package uom.edu.se_assignment.LibrarySystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TitleFilter implements FilterCriteria 
+public class TitleFilter extends FilterCriteria 
 {
+	@Override
 	public List<Book> filterCriteria(List<Book> bookList, String keyword) 
 	{
 		List<Book> titleBookList = new ArrayList<Book>();
@@ -19,10 +20,5 @@ public class TitleFilter implements FilterCriteria
 				titleBookList.add(b);
 		}
 		return titleBookList;
-	}
-	
-	public List<Book> filterCriteria(List<Book> bookList, String keyword, String keyword2)
-	{
-		return null;
 	}
 }
