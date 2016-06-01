@@ -8,9 +8,14 @@ public class AuthorFilter implements FilterCriteria
 	public List<Book> filterCriteria(List<Book> bookList, String keyword) 
 	{
 		List<Book> authorBookList = new ArrayList<Book>();
+		String tempKeyword;
+		tempKeyword = keyword.toUpperCase();
+		String actualAuthorName;
 
-		for (Book b : bookList) {
-			if (b.getAuthor().equalsIgnoreCase(keyword))
+		for (Book b : bookList) 
+		{
+			actualAuthorName = b.getAuthor().toUpperCase();
+			if (actualAuthorName.contains(tempKeyword))
 				authorBookList.add(b);
 		}
 		return authorBookList;

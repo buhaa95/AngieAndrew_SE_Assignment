@@ -8,9 +8,14 @@ public class TitleFilter implements FilterCriteria
 	public List<Book> filterCriteria(List<Book> bookList, String keyword) 
 	{
 		List<Book> titleBookList = new ArrayList<Book>();
+		String tempKeyword;
+		tempKeyword = keyword.toUpperCase();
+		String actualTitle;
 
-		for (Book b : bookList) {
-			if (b.getTitle().equalsIgnoreCase(keyword))
+		for (Book b : bookList) 
+		{
+			actualTitle = b.getTitle().toUpperCase();
+			if (actualTitle.contains(tempKeyword))
 				titleBookList.add(b);
 		}
 		return titleBookList;

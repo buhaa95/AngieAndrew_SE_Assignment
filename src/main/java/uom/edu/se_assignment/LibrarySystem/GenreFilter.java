@@ -9,7 +9,7 @@ public class GenreFilter implements FilterCriteria
 	{
 		Genre genre = Genre.valueOf(keyword.toUpperCase());
 		List<Book> genreBookList = new ArrayList<Book>();
-		
+
 		for (Book b: bookList)
 		{
 			if(b.getGenre() == genre)

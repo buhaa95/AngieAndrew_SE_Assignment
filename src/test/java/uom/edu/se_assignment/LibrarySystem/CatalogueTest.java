@@ -8,6 +8,10 @@ import org.junit.Test;
 public class CatalogueTest {
 	Catalogue catalogue;
 	Book b, b1, b2, b3, b4;
+	GenreFilter genreFilter;
+	YearFilter yearFilter;
+	AuthorFilter authorFilter;
+	TitleFilter titleFilter;
 	
 	@Before
 	public void startup()
@@ -27,6 +31,11 @@ public class CatalogueTest {
 		Catalogue.addBook(b2);
 		Catalogue.addBook(b3);
 		Catalogue.addBook(b4);
+		
+		genreFilter = new GenreFilter();
+		yearFilter = new YearFilter();
+		titleFilter = new TitleFilter();
+		authorFilter = new AuthorFilter();
 	}
 	
 	@Test
@@ -38,19 +47,25 @@ public class CatalogueTest {
 	@Test
 	public void searchByTitleTest() 
 	{
-		Assert.assertEquals(2, catalogue.searchByTitle("Harry").size());			
+		Assert.assertEquals(2, catalogue.searchForBooks(titleFilter, "Harry").size());			
 	}
 	
 	@Test
 	public void searchByGenreTest()
 	{
-		Assert.assertEquals(4, catalogue.searchByGenre(Genre.FICTION).size());
+		Assert.assertEquals(4, catalogue.searchForBooks(genreFilter, Genre.FICTION.getGenreText()).size());
 	}
 	
 	@Test
 	public void searchByYearTest()
 	{
-		Assert.assertEquals(1, catalogue.searchByYear(2005).size());
+		Assert.assertEquals(1, catalogue.searchForBooks(yearFilter, "2005").size());
+	}
+	
+	@Test
+	public void searchByAuthorTest()
+	{
+		Assert.assertEquals(2, catalogue.searchForBooks(authorFilter, "Rowling").size());		
 	}
 	
 	@After
@@ -58,6 +73,10 @@ public class CatalogueTest {
 	{
 		catalogue = null;
 		b = b1 = b2 = b3 = null;
+		genreFilter = null;
+		yearFilter = null;
+		titleFilter = null;
+		authorFilter = null;
 	}
 
 }

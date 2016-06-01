@@ -8,7 +8,6 @@ public class Catalogue
 	//created a static property referring to an instance of the null class
 	public static Catalogue instance = null;
 	private static List<Book> collection;
-	private static List<Book> filterList;
 	
 	//static method to provide access
 	public static Catalogue getInstance()
@@ -38,9 +37,9 @@ public class Catalogue
 		return collection;
 	}
 	
-	public List<Book> searchForBooks(FilterCriteria filter)
+	public List<Book> searchForBooks(FilterCriteria filter, String keyword)
 	{
-		return filter.filterCriteria(filterList, "");
+		return filter.filterCriteria(collection, keyword);
 	}
 	
 	/* Following code is not required anymore
