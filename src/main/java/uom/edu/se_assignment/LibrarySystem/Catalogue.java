@@ -8,6 +8,7 @@ public class Catalogue
 	//created a static property referring to an instance of the null class
 	public static Catalogue instance = null;
 	private static List<Book> collection;
+	private static List<Book> filterList;
 	
 	//static method to provide access
 	public static Catalogue getInstance()
@@ -37,6 +38,12 @@ public class Catalogue
 		return collection;
 	}
 	
+	public List<Book> searchForBooks(FilterCriteria filter)
+	{
+		return filter.filterCriteria(filterList, "");
+	}
+	
+	/* Following code is not required anymore
 	public List<Book> searchByTitle(String word)
 	{
 		word = word.toUpperCase();
@@ -79,6 +86,7 @@ public class Catalogue
 		}
 		return myList;
 	}	
+	*/
 	
 	private static boolean isValidBookId(int id)
 	{	
